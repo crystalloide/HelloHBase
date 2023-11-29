@@ -9,9 +9,9 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 
 public class HelloHBase {
-    private static final TableName TABLE_NAME = TableName.valueOf("test_table_example");
-    private static final byte[] CF_NAME = Bytes.toBytes("test_cf");
-    private static final byte[] QUALIFIER = Bytes.toBytes("test_column");
+    private static final TableName TABLE_NAME = TableName.valueOf("Exemple_table_formation");
+    private static final byte[] CF_NAME = Bytes.toBytes("cf_formation1");
+    private static final byte[] QUALIFIER = Bytes.toBytes("column_formation");
     private static final byte[] ROW_ID = Bytes.toBytes("row01");
 
     public static void createTable(final Admin admin) throws IOException {
@@ -24,12 +24,12 @@ public class HelloHBase {
     }
 
     public static void putRow(final Table table) throws IOException {
-        System.out.println("Inserting a row into an HBase Table with the key: " + Bytes.toString(ROW_ID));
+        System.out.println("Insertion d'une row dans la table HBase avec la key : " + Bytes.toString(ROW_ID));
         table.put(new Put(ROW_ID).addColumn(CF_NAME, QUALIFIER, Bytes.toBytes("Hello, Hbase!")));
     }
 
     public static void getRow(final Table table) {
-        System.out.println("Retrieving a row from an HBase Table for the key:" + Bytes.toString(ROW_ID));
+        System.out.println("Lecture d'une row de la table HBase ayant la key :" + Bytes.toString(ROW_ID));
         Get g = new Get(ROW_ID);
         Result r = null;
         try {
@@ -40,13 +40,13 @@ public class HelloHBase {
         assert r != null;
         byte[] value = r.getValue(CF_NAME, QUALIFIER);
         String output = Bytes.toString(value);
-        System.out.println ("The cell value is: " + output);
+        System.out.println ("La valeur de la cellule correspondante est : " + output);
     }
 
     public static void main(String[] args) throws IOException {
         Configuration config = HBaseConfiguration.create();
 
-        System.out.println("Creating an HBase Table: " + TABLE_NAME + " with CF: " + Bytes.toString(CF_NAME) + " with Qualifier: " + Bytes.toString(QUALIFIER));
+        System.out.println("Création de la table dans HBase : " + TABLE_NAME + ", avec la famille de colonne : " + Bytes.toString(CF_NAME) + ", avec le nom de colonne (Qualifier) : " + Bytes.toString(QUALIFIER));
         try (Connection connection = ConnectionFactory.createConnection(config); Admin admin = connection.getAdmin()) {
             createTable(admin);
 
