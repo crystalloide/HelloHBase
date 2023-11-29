@@ -6,4 +6,4 @@ This is a sample HBase Java API program which will do the following:
 2) Insert a row into an HBase table
 3) Read the row from HBase table
 
-I used CDP 7.1.7 with HBase 2.2.3 version
+I used a self managed cluster Hadoop 3.1 HA (High Avalilabilty) with Zookeeper HA and HBase HA version 2.5.6 
